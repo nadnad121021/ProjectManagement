@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>Manager | Clients</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+      <link rel="stylesheet" href="/assets/styles/manager_clients.css">
+   </head>
+   <body>
+      <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet"> -->
+      <div class="menu"> <span></span> </div>
+      <nav id="nav">
+         <ul class="main">
+            <p style="font-size: 2em; color: #fff;">Manager</p>
+            <li><a href="manager_takenProjects" style="color: #b7ac7f;">Taken Projects</a></li>
+            <li><a href="manager_openProjects">Open Projects</a></li>
+            <li><a href="manager_clients">Clients</a></li>
+            <li><a href="#">Approval</a></li>
+            <li><a href="/">Logout</a></li>
+         </ul>
+      </nav>
+      <div class="overlay"></div>
+      <script>
+         $('.menu, .overlay').click(function () {
+           $('.menu').toggleClass('clicked');
+           $('#nav').toggleClass('show');
+         });
+      </script>
+      <div class="container">
+         <h3 style="margin-top: 5%;" class="font-weight-normal">List of all Clients</h3>
+         <table class="table table-bordered table-striped">
+            <thead class="container fixedHeader">
+               <tr>
+                  <th style="width: 3%;">#</th>
+                  <th style="width: 20%;">Name</th>
+                  <th style="width: 20%;">Project</th>
+                  <th style="width: 3%;"></th>
+                  <th style="width: 3%;"></th>
+               </tr>
+            </thead>
+            <tbody style="background:#f2f2f2;" align="center" class="container scrollContent">
+               <tr>
+                    <td>1</td>
+                    <td>Panfilo Lacson</td>
+                    <td>Inventory System</td>
+               </tr>
+            </tbody>
+         </table>
+      </div>
+   </body>
+</html>
