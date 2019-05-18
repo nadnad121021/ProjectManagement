@@ -54,61 +54,26 @@
                   <th style="width: 10%; padding-left: 3%;">Update</th>
                </thead>
                <tbody>
-                  <tr>
-                     <td>1</td>
-                     <td>Blog</td>
-                     <td>Bong Revilla</td>
-                     <td>04/24/2019</td>
-                     <td>2 out of 6</td>
-                     <td>
-                        <!-- <button class="btn btn-sm btn-info button" style="width: 80%; margin-left: 17%;">View</button> -->
-                        <select class="form-control form-control-sm">
-                           <option>View Task</option>
-                           <option disabled>Task 1</option>
-                           <option disabled>Task 2</option>
-                           <option disabled>Task 3</option>
-                           <option disabled>Task 4</option>
-                           <option disabled>Task 5</option>
-                           <option disabled>Task 6</option>
-                        </select>
-                     </td>
-                     <td><button class="btn btn-sm btn-info" style="width: 90%;">Update</button></td>
-                  </tr>
-                  <tr>
-                     <td>2</td>
-                     <td>Library System</td>
-                     <td>Chel Diokno</td>
-                     <td>02/01/2019</td>
-                     <td>3 out of 4</td>
-                     <td>
-                        <!-- <button class="btn btn-sm btn-info button" style="width: 80%; margin-left: 17%;">View</button> -->
-                        <select class="form-control form-control-sm">
-                           <option>View Task</option>
-                           <option disabled>Task 1</option>
-                           <option disabled>Task 2</option>
-                           <option disabled>Task 3</option>
-                           <option disabled>Task 4</option>
-                        </select>
-                     </td>
-                     <td><button class="btn btn-sm btn-info" style="width: 90%;">Update</button></td>
-                  </tr>
-                  <tr>
-                     <td>3</td>
-                     <td>Inventory System</td>
-                     <td>Nancy Binay</td>
-                     <td>05/16/2019</td>
-                     <td>1 out of 3</td>
-                     <td>
-                        <!-- <button class="btn btn-sm btn-info button" style="width: 80%; margin-left: 17%;">View</button> -->
-                        <select class="form-control form-control-sm">
-                           <option>View Task</option>
-                           <option disabled>Task 1</option>
-                           <option disabled>Task 2</option>
-                           <option disabled>Task 3</option>
-                        </select>
-                     </td>
-                     <td><button class="btn btn-sm btn-info" style="width: 90%;">Update</button></td>
-                  </tr>
+                 <% var counter = 1 %>
+                 <% Project.forEach(function(item){%>
+                    <tr>
+                       <td><%= counter %></td>
+                       <td><%= item.ProjectName %></td>
+                       <td><%= item.Client %></td>
+                       <td><%= item.DateAdded %></td>
+                       <td><%= item.Progress+" out of "+item.Tasks.length %></td>
+                       <td>
+                           <select class="form-control form-control-sm">
+                                 <option>View Task</option>
+                                 <% item.Tasks.forEach(function(task){%>
+                                     <option value="<%= task %>"><%= task %></option>
+                                 <%})%>
+                           </select>
+                       </td>
+                       <td><button class="btn btn-sm btn-info" id="<%= item._id %>" style="width: 90%;">Update</button></td>
+                    </tr>
+                    <% counter++ %>
+                 <%})%>
                </tbody>
             </table>
          </div>

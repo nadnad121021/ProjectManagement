@@ -8,6 +8,7 @@ const bodyParser = require('body-parser');
 
 const login = require('./routes/loginRoutes/loginRoute.js');
 const ManagerGetRoutes = require('./routes/managerRoutes/getRoutes');
+const ManagerPostRoutes = require('./routes/managerRoutes/postRoutes');
 const SecretaryGetRoutes = require('./routes/secretaryRoutes/getRoutes');
 const ClientGetRoutes = require('./routes/clientRoutes/getRoutes');
 
@@ -32,6 +33,7 @@ app.use(flash());
 
 login(app);
 ManagerGetRoutes(app);
+ManagerPostRoutes(app);
 SecretaryGetRoutes(app);
 ClientGetRoutes(app);
 
