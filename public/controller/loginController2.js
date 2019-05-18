@@ -27,7 +27,7 @@ $(document).ready(function(){
    function caller(message){
         if(message === 'Manager'){
             setTodefault();
-            top.location.href = '/ManagerDashboard';
+            top.location.href = '/Manager_openProjects';
         }else if(message === 'Secretary'){
             setTodefault();
             top.location.href = '/SecretaryDashboard';

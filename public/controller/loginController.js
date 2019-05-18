@@ -10,7 +10,6 @@ $(document).ready(function(){
         if($logUsername.val().length <= 0 || $logPassword.val().length <= 0){
             $Login1.click();
         }else{
-            alert($logUsername.val())
          var credentials = {
              Username:$logUsername.val(),
              Password:$logPassword.val(),
@@ -29,7 +28,7 @@ $(document).ready(function(){
     function caller(message){
          if(message === 'Manager'){
              setTodefault();
-             top.location.href = '/ManagerDashboard';
+             top.location.href = '/Manager_openProjects';
          }else if(message === 'Secretary'){
              setTodefault();
              top.location.href = '/SecretaryDashboard';
@@ -40,7 +39,6 @@ $(document).ready(function(){
              alert("Invalid Credentials! Try Again.")
              location.reload();
          }
-         
      }
      function setTodefault(){
          $logPassword.val('');

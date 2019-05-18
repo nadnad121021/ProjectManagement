@@ -21,10 +21,13 @@ module.exports = function(app){
                 res.send("no data");
             }else{
                 if(result.Type === "Client"){
+                    req.session.username = username;
                     res.send("Client");
                 }else if(result.Type === "Secretary"){
+                    req.session.username = username;
                     res.send("Secretary");
                 }else if(result.Type === "Manager"){
+                    req.session.username = username;
                     res.send("Manager");
                 }
             }

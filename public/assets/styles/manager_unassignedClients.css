@@ -183,7 +183,7 @@ body {
     padding-top: 10%;
     }
     #nav ul.main li:last-of-type {
-    margin-bottom: 0px;
+        margin-bottom: 0px;
     }
     #nav ul.main li a {
     color: #ffffff;
@@ -248,7 +248,7 @@ body {
     transition: all 0.3s ease;
     }
     #nav ul.sub li a:hover {
-    color: #b7ac7f;
+    color: #ec2652;
     }
     .menu:hover span{}
     /*  OVERLAY

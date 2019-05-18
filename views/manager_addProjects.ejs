@@ -12,7 +12,7 @@
       <div class="menu"> <span></span> </div>
       <nav id="nav">
          <ul class="main">
-            <p style="font-size: 2em; color: #fff;">Manager</p>
+            <p style="font-size: 2em; color: #fff;"><%= User %></p>
             <!-- <li><a href="manager_takenProjects.html" style="color: #ec2652;">Taken Projects</a></li> -->
             <li class="has-subnav">
                   <a class="nav-text" href="manager_takenProjects">Taken Projects</a>
@@ -70,10 +70,24 @@
                <button class="btn btn-danger" style="width: 50%;">Cancel</button>
             </div> -->
             <div class="btn-group" role="group" style="width: 100%;">
-               <button type="button" class="btn btn-danger" style="width: 50%;">Cancel</button>
+               <button type="button" id="cancel" class="btn btn-danger" style="width: 50%;">Cancel</button>
                <button type="button" class="btn btn-info" style="width: 50%;">Continue</button>
             </div>
          </form>
       </div>
    </body>
+   <script>
+      $(document).ready(function(){
+          $('#cancel').click(function(){
+             $.ajax({
+                method:'GET',
+                url:'/manager_openProjects',
+                data:{},
+                success:function(){
+                  top.location.href = '/manager_openProjects';
+                }
+             })
+          })
+      })
+   </script>
 </html>

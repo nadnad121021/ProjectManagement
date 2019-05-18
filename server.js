@@ -23,6 +23,8 @@ app.set("view engine", "ejs");
 
 app.use(session({
     secret:'this my sample session',
+    username:"",
+    isLogin:false,
     resave:false,
     saveUninitialized:true
 }));

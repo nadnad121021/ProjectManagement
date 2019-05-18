@@ -1,23 +1,26 @@
 module.exports = function(app){
     app.get('/manager_takenProjects',function(req,res){
-        res.render('../views/manager_takenProjects.ejs');
+        res.render('../views/manager_takenProjects.ejs',{User:req.session.username});
     })
     app.get('/manager_addTasks',function(req,res){
-        res.render('../views/manager_addTasks.ejs');
+        res.render('../views/manager_addTasks.ejs',{User:req.session.username});
     })
     app.get('/manager_clients',function(req,res){
-        res.render('../views/manager_clients.ejs');
+        res.render('../views/manager_clients.ejs',{User:req.session.username});
     })
     app.get('/manager_viewTasks',function(req,res){
-        res.render('../views/manager_viewTasks.ejs');
+        res.render('../views/manager_viewTasks.ejs',{User:req.session.username});
     })
     app.get('/manager_openProjects',function(req,res){
-        res.render('../views/manager_openProjects.ejs');
+        res.render('../views/manager_openProjects.ejs',{User:req.session.username});
     })
     app.get('/manager_addProjects',function(req,res){
-        res.render('../views/manager_addProjects.ejs');
+        res.render('../views/manager_addProjects.ejs',{User:req.session.username});
     })
-    app.get('/manager_assignedProjects',function(req,res){
-        res.render('../views/manager_assignedProjects');
+    app.get('/manager_assignedClients',function(req,res){
+        res.render('../views/manager_assignedClients.ejs',{User:req.session.username});
+    })
+    app.get('/manager_unassignedClients',function(req,res){
+        res.render('../views/manager_unassignedClients.ejs',{User:req.session.username});
     })
 }
