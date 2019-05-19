@@ -29,8 +29,9 @@ module.exports = function(app){
         // find Project name
         var ProjName;
         db.collection('Projects').findOne({'_id':ObjectId(req.body.idProject)},function(err,result){
-            //console.log(result.ProjectName);
+            console.log(result.Tasks);
             ProjName = result.ProjectName;
+            
             //console.log(ProjName)
             db.collection('User').findOne({'_id':ObjectId(req.body.idClient)},function(err,res){
               // console.log(res.FullName)
@@ -44,7 +45,7 @@ module.exports = function(app){
                }else{
                   Projs.push(ProjName)
                }
-               db.collection('User').updateOne({'_id':ObjectId(req.body.idClient)},{$set:{"Status":"Assigned","DateAssigned":req.body.DataAssigned,"Projects":Projs}});
+               db.collection('User').updateOne({'_id':ObjectId(req.body.idClient)},{$set:{"Status":"Assigned","DateAssigned":req.body.DateAssigned,"Projects":Projs}});
                db.collection('Projects').updateOne({'_id':ObjectId(req.body.idProject)},{$set:{"Type":"Taken","Client":res.FullName}})
             })
         })

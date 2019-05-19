@@ -34,6 +34,39 @@ module.exports = function(app){
         var db = mongoUtil.getDb();
         db.collection('User').find({"Type":"Client","Status":"Assigned"}).toArray(function(err,doc){
             console.log(doc)
+            var Tasks = [];
+            doc.forEach(element => {
+                //console.log(element.Projects)
+                element.Projects.forEach(data =>{
+                   //console.log(data)
+                   var ts = {
+                       ProjectName:data,
+                       Tasks:[]
+                   }
+                   db.collection('Projects').find({'ProjectName':data}).toArray(function(err,result){
+                    //console.log(result[0].Tasks)
+                    result.forEach(it=>{
+                        //console.log(it.Tasks)
+                        ts.Tasks = it.Tasks;
+                        Tasks.push(ts);
+                        //console.log(Tasks)
+                    })
+                    
+                  })
+                  //console.log(ts)
+                  //Tasks.push(ts);
+                  //console.log(Tasks)
+                })
+                // db.collection('Projects').find({'ProjectName':element.Projects},function(err,result){
+
+                // })
+            });
+            // doc.Projects.forEach(element => {
+            //     db.collection('Projects').find({'ProjectName':element},function(err,Pro){
+            //         console.log(pro);
+            //     })
+            // });
+            // db.collection('Projects')
             res.render('../views/manager_assignedClients.ejs',{User:req.session.username,Users:doc});
         });
     })
@@ -43,8 +76,10 @@ module.exports = function(app){
         var Projects;
         db.collection('Projects').find({"Type":"Open"}).toArray(function(err,doc){
             Projects = doc;
+            console.log(doc)
         });
         db.collection('User').find({"Type":"Client","Status":"Unassigned"}).toArray(function(err,doc){
+            console.log(doc)
             res.render('../views/manager_unassignedClients.ejs',{User:req.session.username,Users:doc,Project:Projects});
         });
 

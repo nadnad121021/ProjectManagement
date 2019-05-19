@@ -35,7 +35,6 @@ $(document).ready(function(){
         })
         }
     })
-
     $dleteBtn.click(function(){
       var choice =   confirm("Are you sure to delete this Client?");
       var dat = {

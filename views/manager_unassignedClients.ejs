@@ -191,7 +191,7 @@
          list-style: none;
          padding-top: 10%;
          }
-         {
+         #nav ul.main li:last-of-type {
          margin-bottom: 0px;
          }
          #nav ul.main li a {
@@ -397,14 +397,16 @@
             </table>
            <div class="container" id="Projects">
             <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Choose Project</h3>
-            <select class="form-control form-control-sm" id="Proj">
+            <select class="form-control form-control-sm" id="Proj" style="width: 75%; display: inline-block;">
                <option value="EX" >View Projects</option>
                   <% Project.forEach(function(item){%>
                         <option value="<%= item._id %>" ><%= item.ProjectName %></option>
                   <%})%>
             </select>
             <br>
-            <center><button id="Continue" class="btn btn-sm btn-info" style="width: 20%; margin-left: -15%;float: right;">Continue</button></center>
+            <center>
+               <button id="Continue" class="btn btn-sm btn-info" style="width: 20%; margin-left: -15%;float: right;">Continue</button>
+            </center>
            </div>
          </div>
       </div>
