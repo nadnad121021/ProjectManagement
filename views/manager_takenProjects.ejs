@@ -12,7 +12,7 @@
       <div class="menu"> <span></span> </div>
       <nav id="nav">
          <ul class="main">
-            <p style="font-size: 2em; color: #fff;"><%= User %></p>
+            <p style="font-size: 2em; color: #fff;">Manager</p>
             <!-- <li><a href="manager_takenProjects.html" style="color: #ec2652;">Taken Projects</a></li> -->
             <li class="has-subnav">
                   <a class="nav-text" href="manager_takenProjects">Taken Projects</a>
@@ -70,7 +70,7 @@
                                  <%})%>
                            </select>
                        </td>
-                       <td><button class="btn btn-sm btn-info" id="<%= item._id %>" style="width: 90%;">Update</button></td>
+                       <td><button class="btn btn-sm btn-info" data-id="<%= item.Progress %>" data-a="<%= item.Tasks.length %>" id="<%= item._id %>" style="width: 90%;">Update</button></td>
                     </tr>
                     <% counter++ %>
                  <%})%>
@@ -79,4 +79,29 @@
          </div>
       </div>
    </body>
+   <script>
+   $(document).ready(function(){
+     
+      $('.btn-info').click(function(){
+         //alert($(this).attr('data-a'))
+         if($(this).attr('data-id') == $(this).attr('data-a')){
+          $('.btn-info').disable();
+         }
+         if($(this).attr('data-id')< $(this).attr('data-a')){
+           var toUp = {
+              id:$(this).attr('id'),
+           }
+            $.ajax({
+               method:'POST',
+               url:'/updateProgress',
+               data:toUp,
+               success:function(){
+                  top.location.href = "/manager_takenProjects";
+               }
+            })
+         }
+         
+      })
+   })
+   </script>
 </html>

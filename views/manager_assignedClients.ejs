@@ -12,7 +12,7 @@
       <div class="menu"> <span></span> </div>
       <nav id="nav">
          <ul class="main">
-            <p style="font-size: 2em; color: #fff;"><%= User %></p>
+            <p style="font-size: 2em; color: #fff;">Manager</p>
             <!-- <li><a href="manager_takenProjects.html" style="color: #ec2652;">Taken Projects</a></li> -->
             <li class="has-subnav">
                   <a class="nav-text" href="manager_takenProjects">Taken Projects</a>
@@ -61,109 +61,27 @@
                                      <td><%= item.FullName %></td>
                                      <td>
                                           <select class="form-control form-control-sm">
+                                             <option value="EX">View Projects</option>
+                                             <% var taskCounter = 0 %>
                                              <% item.Projects.forEach(function(element){%>
-                                                <option><%= element %></option>
+                                                <option value="<%= taskCounter++ %>"><%= element %></option>
                                              <%})%>
                                           </select>
                                       </td>
-                                     <td></td>
+                                     <td><input type="text" disabled style="background:transparent;border:none" id="<%= item._id %>" value="3 out of 4"></td>
+                                     <td><input type="text" disabled style="background:transparent;border:none" id="<%= item._id %>" value="02/25/2019"></td>
+                                     <td>
+                                          <select class="form-control form-control-sm task">
+                                                <option>View Task</option>
+                                                <!-- <option disabled>Task 1</option>
+                                                <option disabled>Task 2</option>
+                                                <option disabled>Task 3</option>
+                                                <option disabled>Task 4</option> -->
+                                          </select>
+                                     </td>
+                                     <td><button class="btn btn-sm btn-info" style="width: 70%; margin-left: 25%;">Assign</button></td>
                                   </tr>
                          <%})%>
-                        <tr>
-                           <td>1</td>
-                           <td>Panfilo Lacson</td>
-                           <td>
-                              <select class="form-control form-control-sm">
-                                 <option>Project 1</option>
-                                 <option>Project 2</option>
-                                 <option>Project 3</option>
-                                 <option>Project 4</option>
-                              </select>
-                           </td>
-                           <td>3 out of 4</td>
-                           <td>02/25/2019</td>
-                           <td>
-                              <select class="form-control form-control-sm task">
-                                 <option>View Task</option>
-                                 <option disabled>Task 1</option>
-                                 <option disabled>Task 2</option>
-                                 <option disabled>Task 3</option>
-                                 <option disabled>Task 4</option>
-                              </select>
-                           </td>
-                           <td><button class="btn btn-sm btn-info" style="width: 70%; margin-left: 25%;">Assign</button></td>
-                        </tr>
-                        <tr>
-                           <td>2</td>
-                           <td>Manny Villar</td>
-                           <td>
-                              <select class="form-control form-control-sm ">
-                                 <option>Project 1</option>
-                                 <option>Project 2</option>
-                                 <option>Project 3</option>
-                                 <option>Project 4</option>
-                              </select>
-                           </td>
-                           <td>1 out of 5</td>
-                           <td>10/21/2018</td>
-                           <td>
-                              <select class="form-control form-control-sm task">
-                                 <option>View Task</option>
-                                 <option disabled>Task 1</option>
-                                 <option disabled>Task 2</option>
-                                 <option disabled>Task 3</option>
-                                 <option disabled>Task 4</option>
-                                 <option disabled>Task 5</option>
-                              </select>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>3</td>
-                           <td>Juan Ponce Enrile</td>
-                           <td>
-                              <select class="form-control form-control-sm">
-                                 <option>Project 1</option>
-                                 <option>Project 2</option>
-                                 <option>Project 3</option>
-                                 <option>Project 4</option>
-                              </select>
-                           </td>
-                           <td>2 out of 3</td>
-                           <td>05/19/2019</td>
-                           <td>
-                              <select class="form-control form-control-sm task">
-                                 <option>View Task</option>
-                                 <option disabled>Task 1</option>
-                                 <option disabled>Task 2</option>
-                                 <option disabled>Task 3</option>
-                              </select>
-                           </td>
-                        </tr>
-                        <tr>
-                           <td>4</td>
-                           <td>Gloria Macapagal Arroyo</td>
-                           <td>
-                              <select class="form-control form-control-sm">
-                                 <option>Project 1</option>
-                                 <option>Project 2</option>
-                                 <option>Project 3</option>
-                                 <option>Project 4</option>
-                              </select>
-                           </td>
-                           <td>2 out of 6</td>
-                           <td>06/30/2019</td>
-                           <td>
-                              <select class="form-control form-control-sm task">
-                                 <option>View Task</option>
-                                 <option disabled>Task 1</option>
-                                 <option disabled>Task 2</option>
-                                 <option disabled>Task 3</option>
-                                 <option disabled>Task 4</option>
-                                 <option disabled>Task 5</option>
-                                 <option disabled>Task 6</option>
-                              </select>
-                           </td>
-                        </tr>
                      </tbody>
                   </table>
          </div>

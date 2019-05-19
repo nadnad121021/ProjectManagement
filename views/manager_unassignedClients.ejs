@@ -297,7 +297,7 @@
       <div class="menu"> <span></span> </div>
       <nav id="nav">
          <ul class="main">
-            <p style="font-size: 2em; color: #fff;"><%= User %></p>
+            <p style="font-size: 2em; color: #fff;">Manager</p>
             <!-- <li><a href="manager_takenProjects.html" style="color: #ec2652;">Taken Projects</a></li> -->
             <li class="has-subnav">
                   <a class="nav-text" href="manager_takenProjects">Taken Projects</a>
@@ -397,16 +397,15 @@
             </table>
            <div class="container" id="Projects">
             <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Choose Project</h3>
-            <select class="form-control form-control-sm" id="Proj" style="width: 75%; display: inline-block;">
+            <select class="form-control form-control-sm" id="Proj" style="width: 79.5%; display: inline-block;">
                <option value="EX" >View Projects</option>
                   <% Project.forEach(function(item){%>
                         <option value="<%= item._id %>" ><%= item.ProjectName %></option>
                   <%})%>
             </select>
-            <br>
-            <center>
+
                <button id="Continue" class="btn btn-sm btn-info" style="width: 20%; margin-left: -15%;float: right;">Continue</button>
-            </center>
+
            </div>
          </div>
       </div>

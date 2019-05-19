@@ -13,6 +13,19 @@ module.exports = function(app){
         db.collection('User').insertOne(req.body);
         res.send("Successfully added");
     })
+    app.post('/updateProgress',function(req,res){
+        var mongoUtil = require( '../../public/assets/scripts/mongdb' );
+        var db = mongoUtil.getDb();
+        var ObjectId = require('mongodb').ObjectID;
+        db.collection('Projects').findOne({'_id':ObjectId(req.body.id)},function(err,result){
+          // console.log(result.Progress);
+           var num = Number(result.Progress)+1;
+           db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":num}});
+        });
+       // db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":"Assigned"}});
+        //db.collection('User').insertOne(req.body);
+        res.send("Successfully Updated");
+    })
     app.post('/deleteClient',function(req,res){
         //console.log(req.body);
         var mongoUtil = require( '../../public/assets/scripts/mongdb' );
