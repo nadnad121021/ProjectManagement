@@ -29,6 +29,9 @@ module.exports = function(app){
     app.get('/manager_addProjects',function(req,res){
         res.render('../views/manager_addProjects.ejs',{User:req.session.username});
     })
+    app.get('/manager_approval',function(req,res){
+        res.render('../views/manager_approval.ejs',{User:req.session.username});
+    })
     app.get('/manager_assignedClients',function(req,res){
         var mongoUtil = require( '../../public/assets/scripts/mongdb' );
         var db = mongoUtil.getDb();

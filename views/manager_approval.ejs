@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
    <head>
-      <title>Manager | Clients</title>
+      <title>Manager | Approvals</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-      <script src="/controller/assignAnddeleteClientController.js"></script>
       <style type="text/css">
          body {
          height: 100%;
@@ -290,6 +289,10 @@
          .sub {
          font-size: 0.50rem;
          }
+         .task {
+            width: 100%;
+            margin-left: -6%;
+         }
       </style>
    </head>
    <body>
@@ -297,7 +300,7 @@
       <div class="menu"> <span></span> </div>
       <nav id="nav">
          <ul class="main">
-            <p style="font-size: 2em; color: #fff;"><%= User %></p>
+            <p style="font-size: 2em; color: #fff;">Manager</p>
             <!-- <li><a href="manager_takenProjects.html" style="color: #ec2652;">Taken Projects</a></li> -->
             <li class="has-subnav">
                   <a class="nav-text" href="manager_takenProjects">Taken Projects</a>
@@ -314,7 +317,7 @@
                   <li><a href="manager_unassignedClients" class="sub">Unassigned Clients</a></li>
                </ul>
             </li>
-            <li><a href="manager_approval">Approval</a></li>
+            <li><a href="manager_approval" style="color: #ec2652;">Approval</a></li>
             <li><a href="/">Logout</a></li>
          </ul>
       </nav>
@@ -325,90 +328,83 @@
            $('#nav').toggleClass('show');
          });
       </script>
-      <style>
-         div.tableContainer {
-         clear: both;
-         height: 360px;
-         overflow: auto;
-         width: 100%;
-         }
-         /* define width of table. Add 16px to width for scrollbar.           */
-         html>body div.tableContainer table {
-         width: 100%;
-         }
-         html>body thead.fixedHeader tr {
-         display: block;
-         padding-right: 17px;
-         width: 100%;
-         }
-         thead.fixedHeader {
-         font-weight: normal;
-         text-align: center
-         }
-         thead.fixedHeader {
-         color: #000;
-         display: block;
-         text-decoration: none;
-         width: 100%;
-         }
-         html>body tbody.scrollContent {
-         display: block;
-         height: 430px;
-         overflow: auto;
-         }
-         tbody.scrollContent td, tbody.scrollContent tr.normalRow td {
-         padding: 2px 3px 3px 3px;
-         }
-         tbody.scrollContent tr.alternateRow td {
-         padding: 2px 3px 3px 4px;
-         }
-         html>body thead.fixedHeader th {
-         width: 60px;
-         }
-         html>body tbody.scrollContent td {
-         width: 60px;
-         }
-      </style>
-      <div class="container" style="margin-top: 5%; width: 50%;">
-         <a href="manager_addClients"><button class="btn btn-info btn-sm but-add" style="float: right;">Add Clients</button></a>
-         <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Unassigned Clients</h3>
+      <div class="container" style="margin-top: 5%; width: 60%;">
+         <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Needs Approval</h3>
          <div class="row">
             <table class="table table-borderless table-hover">
                <thead class="thead-dark">
                   <th style="width: 10%;">#</th>
-                  <th style="width: 30%;">Client</th>
-                  <th style="width: 20%;">Date Added</th>
-                  <th style="width: 20%; padding-left: 10%;">Assign</th>
-                  <th style="width: 10%; padding-left: 2%;">Delete</th>
+                  <th style="width: 20%;">Client</th>
+                  <th style="width: 25%;">Project</th>
+                  <th style="width: 15%;">Tasks</th>
+                  <th style="width: 20%; padding-left: 6%;">Changes</th>
+                  <th style="width: 15%; padding-left: 1.5%;">Status</th>
                </thead>
                <tbody>
-                  <% var counter= 1 %>
-                  <% Users.forEach(function(item){%>
-                     <tr>
-                           <td><%= counter %></td>
-                           <td><%= item.FullName %></td>
-                           <td><%= item.DateAdded %></td> 
-                           <td><button id="<%= item._id %>" class="btn btn-sm btn-info but-assign" style="width: 50%; margin-left: 37%;">Assign</button></td>
-                           <td><button id="<%= item._id %>" class="btn btn-sm btn-danger but-delete" style="width: 110%; margin-left: -15%;">Delete</button></td>       
-                     </tr>
-                     <% counter++ %>
-                  <%})%>
+                  <tr>
+                      <td>1</td>
+                      <td>Chel Diokno</td>
+                      <td>Corrupt Politician Detector</td>
+                      <td>
+                            <select class="form-control form-control-sm" style="width: 90%;">
+                                <option>View Task</option>
+                                <option disabled>Task 1</option>
+                                <option disabled>Task 2</option>
+                                <option disabled>Task 3</option>
+                                <option disabled>Task 4</option>
+                            </select>
+                      </td>
+                      <td><button class="btn btn-sm btn-info" style="margin-left: 20%;" id="changes">View Changes</button></td>
+                      <td>Denied</td>
+                    </tr>
                </tbody>
             </table>
-           <div class="container" id="Projects">
-            <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Choose Project</h3>
-            <select class="form-control form-control-sm" id="Proj" style="width: 75%; display: inline-block;">
-               <option value="EX" >View Projects</option>
-                  <% Project.forEach(function(item){%>
-                        <option value="<%= item._id %>" ><%= item.ProjectName %></option>
-                  <%})%>
-            </select>
-            <br>
-            <center>
-               <button id="Continue" class="btn btn-sm btn-info" style="width: 20%; margin-left: -15%;float: right;">Continue</button>
-            </center>
-           </div>
+         </div>
+         <div class="row" style="margin-top: 5%;" id="edit">
+            <table class="table table-bordered">
+                <tbody>
+                  <tr>
+                    <td rowspan="6" style="text-align:center; width: 50%; vertical-align: middle; font-weight: bolder; font-size: 2rem;">Tasks</td>
+                    <td>Task 1 edited</td>
+                  </tr>
+                  <tr>
+                    <td>Task 2 edited</td>
+                  </tr>
+                  <tr>
+                    <td>Task 3 wala gi edit</td>
+                  </tr>
+                  <tr>
+                    <td>Task 4 wala gi edit</td>
+                  </tr>
+                  <tr>
+                    <td>Task 5 wala gi edit</td>
+                  </tr>
+                  <tr>
+                    <td>Task 6 wala gi edit</td>
+                  </tr>
+                </tbody>
+              </table>
+              <div style="width: 100%; margin-top: 2%;">
+                <center>
+                    <button type="button" class="btn btn-danger" style="width: 12%;" id="deny">Deny</button>
+                    <button type="button" class="btn btn-info" style="width: 12%;" id="approve">Approve</button>
+                </center>
+              </div>
          </div>
       </div>
    </body>
+   <script>
+        $(document).ready(function(){
+            $("#edit").hide();
+            $("#changes").click(function(){
+                $("#edit").show();
+            })     
+            $("#deny").click(function(){
+                $("#edit").hide();
+            });
+            $("#approve").click(function(){
+                $("#edit").hide();
+            });
+        });
+   </script>
 </html>
