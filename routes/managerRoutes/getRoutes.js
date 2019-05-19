@@ -79,10 +79,10 @@ module.exports = function(app){
         var Projects;
         db.collection('Projects').find({"Type":"Open"}).toArray(function(err,doc){
             Projects = doc;
-            console.log(doc)
+           // console.log(doc)
         });
         db.collection('User').find({"Type":"Client","Status":"Unassigned"}).toArray(function(err,doc){
-            console.log(doc)
+           // console.log(doc)
             res.render('../views/manager_unassignedClients.ejs',{User:req.session.username,Users:doc,Project:Projects});
         });
 

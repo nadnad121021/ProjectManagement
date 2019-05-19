@@ -35,33 +35,63 @@ module.exports = function(app){
         res.send("Successfully deleted");
     })
     app.post('/assignClient',function(req,res){
-        //console.log(req.body);
+        console.log(req.body);
         var mongoUtil = require( '../../public/assets/scripts/mongdb' );
         var db = mongoUtil.getDb();
         var ObjectId = require('mongodb').ObjectID;
         // find Project name
         var ProjName;
-        db.collection('Projects').findOne({'_id':ObjectId(req.body.idProject)},function(err,result){
-            console.log(result.Tasks);
-            ProjName = result.ProjectName;
+        var Projects = [];
+        
+        db.collection('User').findOne({'_id':ObjectId(req.body.idClient)},function(err,res){
+            console.log(res)
+            db.collection('Projects').updateOne({'_id':ObjectId(req.body.idProject)},{$set:{"Type":"Taken","Client":res.FullName}})
+            var Projs = [];
+            if(res.Projects){
+                res.Projects.forEach(element => {
+                    Projs.push(element);
+               });
+            }
+                db.collection('Projects').findOne({'_id':ObjectId(req.body.idProject)},function(err,result){
+                    console.log(result)
+                    var ProjectN = result.ProjectName;
+                    Projs.push(result.Tasks);
+                    var proj = {
+                        ProjectName:ProjectN,
+                        Tasks:Projs
+                    }
+                    Projects.push(proj);
+                    db.collection('User').updateOne({'_id':ObjectId(req.body.idClient)},{$set:{"Status":"Assigned","DateAssigned":req.body.DateAssigned,"Projects":Projects}});
+                })
             
-            //console.log(ProjName)
-            db.collection('User').findOne({'_id':ObjectId(req.body.idClient)},function(err,res){
-              // console.log(res.FullName)
-               var Projs = [];
-               if(res.Projects){
-                   //console.log("Defined")
-                   res.Projects.forEach(element => {
-                     Projs.push(element);
-                   });
-                   Projs.push(ProjName)
-               }else{
-                  Projs.push(ProjName)
-               }
-               db.collection('User').updateOne({'_id':ObjectId(req.body.idClient)},{$set:{"Status":"Assigned","DateAssigned":req.body.DateAssigned,"Projects":Projs}});
-               db.collection('Projects').updateOne({'_id':ObjectId(req.body.idProject)},{$set:{"Type":"Taken","Client":res.FullName}})
-            })
         })
+
+        // db.collection('Projects').findOne({'_id':ObjectId(req.body.idProject)},function(err,result){
+        //     console.log(result.Tasks);
+        //     ProjName = result.ProjectName;
+        //     var proj = {
+        //         Client:"",
+        //         ProjectName:ProjName,
+        //         Tasks:[]
+        //     }
+        //     //console.log(ProjName)
+        //     db.collection('User').findOne({'_id':ObjectId(req.body.idClient)},function(err,res){
+        //       // console.log(res.FullName)
+        //        var Projs = [];
+        //        if(res.Projects){
+        //            //console.log("Defined")
+        //            res.Projects.forEach(element => {
+        //               Projs.push(element);
+        //            });
+        //            Projs.push(ProjName)
+
+        //        }else{
+        //            Projs.push(ProjName)
+        //        }
+        //       // db.collection('User').updateOne({'_id':ObjectId(req.body.idClient)},{$set:{"Status":"Assigned","DateAssigned":req.body.DateAssigned,"Projects":Projs}});
+        //        //db.collection('Projects').updateOne({'_id':ObjectId(req.body.idProject)},{$set:{"Type":"Taken","Client":res.FullName}})
+        //     })
+        // })
         //db.collection('Projects').updateOne({'_id':ObjectId(req.body.idProject)},{$set:{"Status":"Taken","Projects":[]}});
         res.send("Successfully Assigned");
     })
