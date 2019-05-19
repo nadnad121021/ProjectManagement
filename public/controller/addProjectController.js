@@ -39,7 +39,8 @@ $(document).ready(function(){
                 ProjectName:$ProjectName.val(),
                 Tasks:task,
                 Type:"Open",
-                DateAdded:month+"/"+day+"/"+year
+                DateAdded:month+"/"+day+"/"+year,
+                Progress:0
             }
             $.ajax({
                 method:"POST",

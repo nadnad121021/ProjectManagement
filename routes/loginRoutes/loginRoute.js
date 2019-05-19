@@ -33,4 +33,14 @@ module.exports = function(app){
             }
         });
     })
+    app.post('/changeCredential',function(req,res){
+        console.log(req.body)
+        var username = req.body.ClientUserName;
+        var newpassword = req.body.newPassword;
+        var newUsername = req.body.newUsername;
+        var mongoUtil = require( '../../public/assets/scripts/mongdb' );
+        var db = mongoUtil.getDb();
+        db.collection('User').updateOne({'Username':username},{$set:{'Username':newUsername,"Password":newpassword}});
+        res.send("Success")
+    })
 }

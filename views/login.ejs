@@ -4,7 +4,7 @@
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
-      <link rel="stylesheet" href="/assets/styles/login.css">
+      <link rel="stylesheet"  href="/assets/styles/login3.css">
    </head>
    <body>
       <div class="container">
@@ -16,22 +16,51 @@
                   <form>
                      <div class="input-container">
                         <input type="text" id="logUsername" required="required"/>
-                        <label for="logUsername">Username</label>
+                        <label for="Username">Username</label>
                         <div class="bar"></div>
                      </div>
                      <div class="input-container">
                         <input type="password" id="logPassword" required="required"/>
-                        <label for="logPassword">Password</label>
+                        <label for="Password">Password</label>
                         <div class="bar"></div>
                      </div>
                      <div class="button-container">
                         <button id="login"><span>Continue</span></button>
                         <input type="submit" id="login1" style="display:none"></input>
                      </div>
+                     <div class="footer"><a href="#"></a></div>
                   </form>
                </div>
-               
+               <div class="card alt">
+                    <div class="toggle" data-toggle="tooltip" data-placement="right" title="Click to change your password" style="color: #ec2652;">.</div>
+                  <h1 class="title">
+                     Change Credentials
+                     <div class="close"></div>
+                  </h1>
+                  <form>
+                     <div class="input-container">
+                        <input type="text" id="newUsername" required="required"/>
+                        <label for="Username">Username</label>
+                        <div class="bar"></div>
+                     </div>
+                     <div class="input-container">
+                        <input type="password" id="newPassword" required="required"/>
+                        <label for="Password">Password</label>
+                        <div class="bar"></div>
+                     </div>
+                     <div class="input-container">
+                        <input type="password" id="confirmPassword" required="required"/>
+                        <label for="Repeat Password">Repeat Password</label>
+                        <div class="bar"></div>
+                     </div>
+                     <div class="button-container">
+                        <button id="changeCredential"><span>OK</span></button>
+                        <input type="submit" id="changeCredential1" style="display:none"></input>
+                     </div>
+                  </form>
+               </div>
             </div>
+            <!-- <a id="portfolio" href="http://facebook.com/wizardddddd" title="Visit facebook profile!"><i class="fa fa-link"></i></a> -->
          </div>
       </div>
    </body>
