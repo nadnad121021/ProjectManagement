@@ -61,7 +61,7 @@
                                   <td><%= counter %></td>
                                   <td><%= user.FullName %></td>
                                   <td><%= user.Projects[innerCounter].ProjectName %></td>
-                                  <td><%= user.Projects[innerCounter].DateAssigned %></td>
+                                  <td><%= user.Projects[innerCounter].Progress + " out of " +user.Projects[innerCounter].Tasks.length%></td>
                                   <td><%= user.Projects[innerCounter].DateAssigned %></td>
                               <%}else{%>
                                  <td></td>

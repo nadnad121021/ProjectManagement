@@ -23,27 +23,37 @@ module.exports = function(app){
           console.log(result.ProjectName);
            var Project = result.ProjectName;
            var num = Number(result.Progress)+1;
-           //db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":num}});
+           db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":num}});
            db.collection('User').findOne({"Status":"Assigned","FullName":who},function(err,result){
-              // console.log(result)
-               var pro = result;
-            
-              // console.log(pro)
-              
-               //console.log(noJohn)
-            //    result.Projects.forEach(function(item){
-            //       console.log(item)
+             // console.log(result)
+               var pro ={
+                   FullName:result.FullName,
+                   Username:result.Username,
+                   Password:result.Password,
+                   Type:result.Type,
+                   DateAdded:result.DateAdded,
+                   Status:result.Status,
+                   Projects:result.Projects
+               };
 
-            //       Proje = item;
-            //    })
+            var projectssss = result.Projects;
+            var projecccc = {
+                ProjectName:"",
+                Tasks:[],
+                DateAssigned:"",
+                Progress:0
+            }
             var found = result.Projects.filter(function(item) { return item.ProjectName === Project ; });
-                found.Progress = num;
+                found[0].Progress = num;
+               projecccc.ProjectName = found[0].ProjectName;
+               projecccc.Tasks = found[0].Tasks;
+               projecccc.DateAssigned = found[0].DateAssigned;
+               projecccc.Progress = found[0].Progress;
             var noJohn = result.Projects.filter( el => el.ProjectName !== Project );
-                console.log(found)
-             noJohn.push(found);
-             //console.log(noJohn)
-             pro.Projects = noJohn;
-             //console.log(pro)
+            noJohn.push(projecccc);
+            pro.Projects = noJohn;
+             db.collection('User').deleteOne({"FullName":who});
+             db.collection('User').insertOne(pro);
            })
         });
        // db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":"Assigned"}});
