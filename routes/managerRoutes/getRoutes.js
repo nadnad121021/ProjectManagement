@@ -37,40 +37,15 @@ module.exports = function(app){
         var db = mongoUtil.getDb();
         db.collection('User').find({"Type":"Client","Status":"Assigned"}).toArray(function(err,doc){
             console.log(doc)
-            var Tasks = [];
-            doc.forEach(element => {
-                //console.log(element.Projects)
-                element.Projects.forEach(data =>{
-                   //console.log(data)
-                   var ts = {
-                       ProjectName:data,
-                       Tasks:[]
-                   }
-                   db.collection('Projects').find({'ProjectName':data}).toArray(function(err,result){
-                    //console.log(result[0].Tasks)
-                    result.forEach(it=>{
-                        //console.log(it.Tasks)
-                        ts.Tasks = it.Tasks;
-                        Tasks.push(ts);
-                        //console.log(Tasks)
-                    })
-                    
-                  })
-                  //console.log(ts)
-                  //Tasks.push(ts);
-                  //console.log(Tasks)
+            var Clients = doc;
+            db.collection('Projects').find({"Type":"Open"}).toArray(function(err,open){
+                var Open = open;
+                db.collection('Projects').find({"Type":"Taken"}).toArray(function(err,taken){
+                     //console.log(taken)
+                     res.render('../views/manager_assignedClients.ejs',{OpenProjects:Open,TakenProjects:taken,Users:Clients});
                 })
-                // db.collection('Projects').find({'ProjectName':element.Projects},function(err,result){
-
-                // })
             });
-            // doc.Projects.forEach(element => {
-            //     db.collection('Projects').find({'ProjectName':element},function(err,Pro){
-            //         console.log(pro);
-            //     })
-            // });
-            // db.collection('Projects')
-            res.render('../views/manager_assignedClients.ejs',{User:req.session.username,Users:doc});
+            
         });
     })
     app.get('/manager_unassignedClients',function(req,res){
@@ -80,12 +55,11 @@ module.exports = function(app){
         db.collection('Projects').find({"Type":"Open"}).toArray(function(err,doc){
             Projects = doc;
            // console.log(doc)
+           db.collection('User').find({"Type":"Client","Status":"Unassigned"}).toArray(function(err,user){
+            // console.log(doc)
+             res.render('../views/manager_unassignedClients.ejs',{User:req.session.username,Users:user,Project:Projects});
+          });
         });
-        db.collection('User').find({"Type":"Client","Status":"Unassigned"}).toArray(function(err,doc){
-           // console.log(doc)
-            res.render('../views/manager_unassignedClients.ejs',{User:req.session.username,Users:doc,Project:Projects});
-        });
-
     })
     app.get('/manager_addClients',function(req,res){
         res.render('../views/manager_addClients.ejs',{User:req.session.username});

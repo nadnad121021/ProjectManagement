@@ -14,13 +14,37 @@ module.exports = function(app){
         res.send("Successfully added");
     })
     app.post('/updateProgress',function(req,res){
+        console.log(req.body)
+        var who = req.body.client;
         var mongoUtil = require( '../../public/assets/scripts/mongdb' );
         var db = mongoUtil.getDb();
         var ObjectId = require('mongodb').ObjectID;
         db.collection('Projects').findOne({'_id':ObjectId(req.body.id)},function(err,result){
-          // console.log(result.Progress);
+          console.log(result.ProjectName);
+           var Project = result.ProjectName;
            var num = Number(result.Progress)+1;
-           db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":num}});
+           //db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":num}});
+           db.collection('User').findOne({"Status":"Assigned","FullName":who},function(err,result){
+              // console.log(result)
+               var pro = result;
+            
+              // console.log(pro)
+              
+               //console.log(noJohn)
+            //    result.Projects.forEach(function(item){
+            //       console.log(item)
+
+            //       Proje = item;
+            //    })
+            var found = result.Projects.filter(function(item) { return item.ProjectName === Project ; });
+                found.Progress = num;
+            var noJohn = result.Projects.filter( el => el.ProjectName !== Project );
+                console.log(found)
+             noJohn.push(found);
+             //console.log(noJohn)
+             pro.Projects = noJohn;
+             //console.log(pro)
+           })
         });
        // db.collection('Projects').updateOne({'_id':ObjectId(req.body.id)},{$set:{"Progress":"Assigned"}});
         //db.collection('User').insertOne(req.body);
@@ -45,7 +69,7 @@ module.exports = function(app){
         
         db.collection('User').findOne({'_id':ObjectId(req.body.idClient)},function(err,res){
             console.log(res)
-            db.collection('Projects').updateOne({'_id':ObjectId(req.body.idProject)},{$set:{"Type":"Taken","Client":res.FullName}})
+            db.collection('Projects').updateOne({'_id':ObjectId(req.body.idProject)},{$set:{"Type":"Taken","Client":res.FullName,"DateAssigned":req.body.DateAssigned}})
             var Projs = [];
             if(res.Projects){
                 res.Projects.forEach(element => {
@@ -58,10 +82,12 @@ module.exports = function(app){
                     Projs.push(result.Tasks);
                     var proj = {
                         ProjectName:ProjectN,
-                        Tasks:Projs
+                        Tasks:Projs,
+                        DateAssigned:req.body.DateAssigned,
+                        Progress:result.Progress
                     }
                     Projects.push(proj);
-                    db.collection('User').updateOne({'_id':ObjectId(req.body.idClient)},{$set:{"Status":"Assigned","DateAssigned":req.body.DateAssigned,"Projects":Projects}});
+                    db.collection('User').updateOne({'_id':ObjectId(req.body.idClient)},{$set:{"Status":"Assigned","Projects":Projects}});
                 })
             
         })

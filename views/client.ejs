@@ -36,8 +36,27 @@
                   <th style="width: 10%; padding-left: 6%;">Edit Task</th>
                </thead>
                <tbody>
+                 <% if(Data){%>
+                    <% var counter = 1,taskCounter = 0 %>
+                    <% Data.Projects.forEach(function(item){%>
+                        <tr>
+                          <td><%= counter %></td>
+                          <td><%= item.ProjectName %></td>
+                          <td><%= Data.DateAssigned %></td>
+                          <td><%= item.Progress +" out of "+item.Tasks[taskCounter++].length %></td>
+                          <td>
+                              <select class="form-control form-control-sm">
+                                  <option>View Task</option>
+                                  <% item.Tasks.forEach(function(tas){%>
+                                     <option> <%= tas %> </option>
+                                  <%})%>
+                              </select>
+                          </td>
+                        </tr>
+                    <%})%>
+                 <%}%>
                     <tr>
-                        <td>1</td>
+                        <td></td>
                         <td>ATM Simulation</td>
                         <td>09/27/2018</td>
                         <td>2 out of 4</td>

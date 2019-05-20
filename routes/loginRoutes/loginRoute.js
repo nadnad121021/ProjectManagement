@@ -24,10 +24,10 @@ module.exports = function(app){
                     req.session.username = username;
                     res.send("Client");
                 }else if(result.Type === "Secretary"){
-                    req.session.username = username;
+                   // req.session.username = username;
                     res.send("Secretary");
                 }else if(result.Type === "Manager"){
-                    req.session.username = username;
+                    //req.session.username = username;
                     res.send("Manager");
                 }
             }

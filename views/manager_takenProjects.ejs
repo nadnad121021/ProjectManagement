@@ -70,7 +70,7 @@
                                  <%})%>
                            </select>
                        </td>
-                       <td><button class="btn btn-sm btn-info" data-id="<%= item.Progress %>" data-a="<%= item.Tasks.length %>" id="<%= item._id %>" style="width: 90%;">Update</button></td>
+                       <td><button class="btn btn-sm btn-info" data-id="<%= item.Progress %>" data-a="<%= item.Tasks.length %>" data-client="<%= item.Client %>" id="<%= item._id %>" style="width: 90%;">Update</button></td>
                     </tr>
                     <% counter++ %>
                  <%})%>
@@ -90,6 +90,7 @@
          if($(this).attr('data-id')< $(this).attr('data-a')){
            var toUp = {
               id:$(this).attr('id'),
+              client:$(this).attr('data-client')
            }
             $.ajax({
                method:'POST',

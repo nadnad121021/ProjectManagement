@@ -39,7 +39,7 @@ $(document).ready(function(){
              top.location.href = '/Manager_takenProjects';
          }else if(message === 'Secretary'){
              setTodefault();
-             top.location.href = '/SecretaryDashboard';
+             top.location.href = '/sec_takenProjects';
          }else if(message === 'Client'){
              if($logPassword.val()==="Password"){
                $('.container').stop().addClass('active');
