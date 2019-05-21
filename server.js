@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').createServer(app);
+const io = require('socket.io').listen(server);
 const assert = require('assert');
 const flash = require('connect-flash');
 const session = require('express-session');
