@@ -55,11 +55,11 @@
                                         <%})%>
                                     </select>
                                 </td>
-                                <td><button class="btn btn-sm btn-info edit" style="width: 50%; margin-left: 40%;"data-id = "<%= item.ProjectName %>" id="edit">Edit</button></td>
+                                <td><button class="btn btn-sm btn-info edit" style="width: 50%; margin-left: 40%;" id = "<%= item.ProjectName %>">Edit</button></td>
                              </tr>
                         <% })%>
                     <%}%>
-                    <tr>
+                    <!-- <tr>
                         <td>1</td>
                         <td>ATM Simulation</td>
                         <td>09/27/2018</td>
@@ -73,8 +73,8 @@
                                 <option disabled>Task 4</option>
                             </select>
                         </td>
-                        <td><button class="btn btn-sm btn-info edit" style="width: 50%; margin-left: 40%;" id="edit">Edit</button></td>
-                    </tr>
+                        <td><button class="btn btn-sm btn-info edit" style="width: 50%; margin-left: 40%;" id ="edit">Edit</button></td>
+                    </tr> -->
                </tbody>
             </table>
          </div>
@@ -115,14 +115,7 @@
         $(document).ready(function(){
             $("#table").hide();
             $(".edit").click(function(){
-                $("#table").show();
-            });
-
-            $("#cancel").click(function(){
-                $("#table").hide();
-            });
-            $("#ok").click(function(){
-                $("#table").hide();
+               top.location.href ="/client_viewTasks?ProjectName="+$(this).attr('id');
             });
         });
    </script>

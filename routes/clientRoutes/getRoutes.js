@@ -14,4 +14,14 @@ module.exports = function(app){
          //   }
         })
     })
+
+    app.get('/client_viewTasks',function(req,res){
+      console.log(req.query)
+      var mongoUtil = require( '../../public/assets/scripts/mongdb' );
+      var db = mongoUtil.getDb();
+      db.collection('Projects').findOne({'ProjectName':req.query.ProjectName},function(err,result){
+          res.render('../views/client_viewTasks.ejs',{Project:result});
+      })
+     
+  })
 }
