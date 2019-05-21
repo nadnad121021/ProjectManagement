@@ -36,24 +36,15 @@
                   <!-- <th style="width: 10%; padding-left: 10%;">Add Tasks</th> -->
                </thead>
                <tbody>
-                  <tr>
-                     <td>1</td>
-                     <td>Inventory System</td>
-                     <td style="padding-left: 15.5%;">01/25/2019</td>
-                     <!-- <td><button class="btn btn-sm btn-info" style="width: 40%; margin-left: 46%;">Add</button></td> -->
-                  </tr>
-                  <tr>
-                     <td>2</td>
-                     <td>Library System</td>
-                     <td style="padding-left: 15.5%;">05/25/2019</td>
-                     <!-- <td><button class="btn btn-sm btn-info" style="width: 40%; margin-left: 46%;">Add</button></td> -->
-                  </tr>
-                  <tr>
-                     <td>3</td>
-                     <td>CLS Registration System</td>
-                     <td style="padding-left: 15.5%;">04/05/2019</td>
-                     <!-- <td><button class="btn btn-sm btn-info" style="width: 40%; margin-left: 46%;">Add</button></td> -->
-                  </tr>
+                     <% var counter = 1 %>
+                     <% Project.forEach(function(item){%>
+                        <tr>
+                           <td><%= counter %></td>
+                           <td><%= item.ProjectName %></td>
+                           <td style="padding-left: 15.5%;"><%= item.DateAdded %></td>
+                        </tr>
+                        <% counter++ %>
+                     <%})%>
                </tbody>
             </table>
          </div>

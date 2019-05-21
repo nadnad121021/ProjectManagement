@@ -36,27 +36,31 @@
                   <th style="width: 10%; padding-left: 6%;">Edit Task</th>
                </thead>
                <tbody>
-                 <% if(Data){%>
-                    <% var counter = 1,taskCounter = 0 %>
-                    <% Data.Projects.forEach(function(item){%>
-                        <tr>
-                          <td><%= counter %></td>
-                          <td><%= item.ProjectName %></td>
-                          <td><%= Data.DateAssigned %></td>
-                          <td><%= item.Progress +" out of "+item.Tasks[taskCounter++].length %></td>
-                          <td>
-                              <select class="form-control form-control-sm">
-                                  <option>View Task</option>
-                                  <% item.Tasks.forEach(function(tas){%>
-                                     <option> <%= tas %> </option>
-                                  <%})%>
-                              </select>
-                          </td>
-                        </tr>
-                    <%})%>
-                 <%}%>
+                    <% var counter = 1 , inner = 0; %>
+                    <% if(Data){%>
+                         <% Data.Projects.forEach(function(item){%>
+                             <tr>
+                                <td><%= counter++ %></td>
+                                <td><%= item.ProjectName %></td>
+                                <td><%= item.DateAssigned %></td>
+                                <td><%= item.Progress +" out of "+ item.Tasks[inner++].length %></td>
+                                <td>
+                                    <select class="form-control form-control-sm">
+                                          <option>View Task</option>
+                                        <% item.Tasks.forEach(function(it){%>
+                                          <% it.forEach(function(ite){%>
+                                             <option value=""><%= ite %></option>
+                                          <%})%>
+                                           
+                                        <%})%>
+                                    </select>
+                                </td>
+                                <td><button class="btn btn-sm btn-info edit" style="width: 50%; margin-left: 40%;"data-id = "<%= item.ProjectName %>" id="edit">Edit</button></td>
+                             </tr>
+                        <% })%>
+                    <%}%>
                     <tr>
-                        <td></td>
+                        <td>1</td>
                         <td>ATM Simulation</td>
                         <td>09/27/2018</td>
                         <td>2 out of 4</td>
@@ -69,7 +73,7 @@
                                 <option disabled>Task 4</option>
                             </select>
                         </td>
-                        <td><button class="btn btn-sm btn-info" style="width: 50%; margin-left: 40%;" id="edit">Edit</button></td>
+                        <td><button class="btn btn-sm btn-info edit" style="width: 50%; margin-left: 40%;" id="edit">Edit</button></td>
                     </tr>
                </tbody>
             </table>
@@ -110,7 +114,7 @@
    <script>
         $(document).ready(function(){
             $("#table").hide();
-            $("#edit").click(function(){
+            $(".edit").click(function(){
                 $("#table").show();
             });
 

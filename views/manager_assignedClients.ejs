@@ -44,15 +44,15 @@
             <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Assigned Clients</h3>
             <div class="row">
                <table class="table table-borderless">
-                  <thead class="thead-dark">
-                     <th style="width: 5%;">#</th>
-                     <th style="width: 20%;">Client</th>
-                     <th style="width: 20%;">Project</th>
-                     <th style="width: 15%;">Progress</th>
-                     <th style="width: 15%;">Date Assigned</th>
-                     <th style="width: 15%;">Task</th>
-                     <th style="width: 10%; padding-left: 3%;">Assign</th> 
-                  </thead>
+                     <thead class="thead-dark">
+                           <th style="width: 5%;">#</th>
+                           <th style="width: 20%;">Client</th>
+                           <th style="width: 20%;">Project</th>
+                           <th style="width: 15%;">Progress</th>
+                           <th style="width: 15%;">Date Assignesd</th>
+                           <th style="width: 10%; padding-left: 3%;">Task</th>
+                           <th style="width: 10%; padding-left: 3%;">Assign</th> 
+                     </thead>
                   <tbody>
                      <% var counter = 1, innerCounter = 0 ,taskCounter = 0; %>
                      <% Users.forEach(function(user){%>
@@ -68,125 +68,12 @@
                                  <td><%= user.Projects[i].ProjectName %></td>
                                  <td><%= user.Projects[i].Progress + " out of " +user.Projects[innerCounter].Tasks[taskCounter].length%></td>
                                  <td><%= user.Projects[i].DateAssigned %></td>
-                                 <td>
-                                    <select class="form-control form-control-sm">
-                                          
-                                    </select>
-                                 </td>
+                                 <td><button data-id="<%= user.Projects[i].ProjectName %>" class="btn btn-sm btn-warning view" style="width: 80%;">View</button></td>
                                  <td><button id="<%= user._id %>" class="btn btn-sm btn-info butuon" style="width: 80%; margin-left: 10%;">New</button></td>
                               <%}%>
                            </tr>
                            <% counter++%>
-                     <%})%>
-                    
-                     <!-- <tr>
-                        <td>1</td>
-                        <td>Panfilo Lacson</td>
-                        <td>Project 1</td>
-                        <td>2 out of 4</td>
-                        <td>04/21/2019</td>
-                        <td>
-                           <select class="form-control form-control-sm">
-                              <option>Task 1</option>
-                              <option>Task 2</option>
-                              <option>Task 3</option>
-                              <option>Task 4</option>
-                           </select>
-                        </td>
-                        <td><button class="btn btn-sm btn-info" style="width: 80%; margin-left: 10%;">Assign</button></td>
-                     </tr>
-                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Project 2</td>
-                        <td>3 out of 4</td>
-                        <td>11/21/2019</td>
-                        <td>
-                           <select class="form-control form-control-sm">
-                              <option>Task 1</option>
-                              <option>Task 2</option>
-                              <option>Task 3</option>
-                              <option>Task 4</option>
-                           </select>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Project 3</td>
-                        <td>3 out of 4</td>
-                        <td>05/05/2019</td>
-                        <td>
-                           <select class="form-control form-control-sm">
-                              <option>Task 1</option>
-                              <option>Task 2</option>
-                              <option>Task 3</option>
-                              <option>Task 4</option>
-                           </select>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Project 4</td>
-                        <td>1 out of 4</td>
-                        <td>03/20/2019</td>
-                        <td>
-                           <select class="form-control form-control-sm">
-                              <option>Task 1</option>
-                              <option>Task 2</option>
-                              <option>Task 3</option>
-                              <option>Task 4</option>
-                           </select>
-                        </td>
-                     </tr>
-   
-                     <tr>
-                        <td>2</td>
-                        <td>Gloria Macapacal-Arroyo</td>
-                        <td>Project 1</td>
-                        <td>2 out of 4</td>
-                        <td>06/11/2019</td>
-                        <td>
-                           <select class="form-control form-control-sm">
-                              <option>Task 1</option>
-                              <option>Task 2</option>
-                              <option>Task 3</option>
-                              <option>Task 4</option>
-                           </select>
-                        </td>
-                        <td><button class="btn btn-sm btn-info" style="width: 80%; margin-left: 10%;">Assign</button></td>
-                     </tr>
-                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Project 2</td>
-                        <td>3 out of 4</td>
-                        <td>12/12/2018</td>
-                        <td>
-                           <select class="form-control form-control-sm">
-                              <option>Task 1</option>
-                              <option>Task 2</option>
-                              <option>Task 3</option>
-                              <option>Task 4</option>
-                           </select>
-                        </td>
-                     </tr>
-                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td>Project 3</td>
-                        <td>1 out of 4</td>
-                        <td>10/15/2018</td>
-                        <td>
-                           <select class="form-control form-control-sm">
-                              <option>Task 1</option>
-                              <option>Task 2</option>
-                              <option>Task 3</option>
-                              <option>Task 4</option>
-                           </select>
-                        </td>
-                     </tr> -->
+                     <%})%>             
                   </tbody>
                </table>
                <div class="container" id="Projects">
@@ -204,6 +91,7 @@
    </body>
    <script>
         $(document).ready(function(){
+           $view = $('.view');
            $Proj = $('#Proj');
            var IDClient;
            $Continue = $('#Continue');
@@ -238,6 +126,23 @@
                      }
                  })
                }
+            })
+
+            /// view 
+            $view.click(function(){
+               var task ={
+                  ProjectName:$(this).attr('data-id')
+               }
+               top.location.href = "/manager_viewTasks?ProjectName="+$(this).attr('data-id');
+               // $.ajax({
+               //       method:'GET',
+               //       url:'/viewTask',
+               //       data:task,
+               //       success:function(mesage){
+               //           alert(mesage);
+               //          // top.location.href = "/manager_assignedClients"
+               //       }
+               //   })
             })
         })
         function myFunction(hehe){

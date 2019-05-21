@@ -13,7 +13,13 @@ module.exports = function(app){
         res.render('../views/manager_clients.ejs',{User:req.session.username});
     })
     app.get('/manager_viewTasks',function(req,res){
-        res.render('../views/manager_viewTasks.ejs',{User:req.session.username});
+        console.log(req.query)
+        var mongoUtil = require( '../../public/assets/scripts/mongdb' );
+        var db = mongoUtil.getDb();
+        db.collection('Projects').findOne({'ProjectName':req.query.ProjectName},function(err,result){
+            res.render('../views/manager_viewTasks.ejs',{Project:result});
+        })
+       
     })
     app.get('/manager_openProjects',function(req,res){
         var mongoUtil = require( '../../public/assets/scripts/mongdb' );
