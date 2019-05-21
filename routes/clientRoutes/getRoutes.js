@@ -19,9 +19,8 @@ module.exports = function(app){
       console.log(req.query)
       var mongoUtil = require( '../../public/assets/scripts/mongdb' );
       var db = mongoUtil.getDb();
-      db.collection('Projects').findOne({'ProjectName':req.query.ProjectName},function(err,result){
-          res.render('../views/client_viewTasks.ejs',{Project:result});
+      db.collection('Projects').find({'Client':req.query.ClientName}).toArray(function(err,result){
+        res.render('../views/client_viewTasks.ejs',{Projects:result});
       })
-     
-  })
+    })
 }
