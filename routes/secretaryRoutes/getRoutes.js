@@ -31,4 +31,12 @@ module.exports = function(app){
         });
        // res.render('../views/sec_openProjects.ejs');
     })
+    app.get('/sec_chat',function(req,res){
+        // var mongoUtil = require( '../../public/assets/scripts/mongdb' );
+        // var db = mongoUtil.getDb();
+       // db.collection('Projects').find({"Client":req.query.ClientName}).toArray(function(err,doc){
+            res.render('../views/sec_chat.ejs');
+       // });
+       
+    })
 }

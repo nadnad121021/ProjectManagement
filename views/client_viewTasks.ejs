@@ -43,16 +43,20 @@
             <div class="row" style="margin-top: 5%; width: 100%; margin-bottom: 5%;" id="task">
            <table class="table table-bordered">
                <tbody>
-                  <% counter = 1 %>
+                  <% counter = 1, taskCounter = 0; %>
                  <tr>
                    <td rowspan="6" style="text-align:center; width: 50%; vertical-align: middle; font-weight: bolder; font-size: 2rem;"><%= Project.ProjectName %></td>
                    <td><input type="text" class="form-control form-control-sm" placeholder="<%= Project.Tasks[0] %>"></td>
                  </tr>
+                 <input type="number" id="in" style="display:none" value="<%= Project.Tasks.length %>">
+                 <input type="text" id="TaskName" style="display:none" value="<%= Project.ProjectName %>">
+                 <form action="" id="form">
                   <% for(;counter< Project.Tasks.length;counter++){%>
-                     <tr>
-                        <td><input type="text" class="form-control form-control-sm" placeholder="<%= Project.Tasks[counter] %>"></td>
+                      <tr>
+                        <td><input type="text" class="form-control form-control-sm" id="<%= taskCounter++ %>" placeholder="<%= Project.Tasks[counter] %>"></td>
                      </tr>
                   <%}%>
+               </form>
                </tbody>
              </table>
              <div style="width: 100%; margin-top: 2%;">
@@ -62,6 +66,26 @@
                     </center>
               </div>
         </div>
-         </div>
+      </div>
+      <script>
+      $(document).ready(function(){
+         var count = $('#in').val()
+         var newTasks = [];
+         $('#ok').click(function(){
+            var i = 0;
+            var count = $('#in').val()
+            for(;i < count; i++){
+               // if($(`#${count-i}`).val().length > 0){
+               //    newTasks.push($(`#${count-i}`).val());
+               //    console.log(newTasks)
+               // }
+               console.log($(`#${count-i}`).val())
+              // newTasks.push($(`#${count-i}`).val());
+            }
+           alert(newTasks)
+           newTasks = []
+         });
+      })
+      </script>
    </body>
 </html>

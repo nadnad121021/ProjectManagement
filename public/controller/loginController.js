@@ -43,9 +43,9 @@ $(document).ready(function(){
          }else if(message === 'Client'){
              if($logPassword.val()==="Password"){
                $('.container').stop().addClass('active');
+             }else{
+               top.location.href = '/ClientDashboard'; 
              }
-                top.location.href = '/ClientDashboard'; 
-                
          }else{
              alert("Invalid Credentials! Try Again.")
              location.reload();

@@ -80,4 +80,12 @@ module.exports = function(app){
         })
         
     })
+    app.get('/manager_chat',function(req,res){
+        // var mongoUtil = require( '../../public/assets/scripts/mongdb' );
+        // var db = mongoUtil.getDb();
+        //db.collection('Projects').find({"Client":req.query.ClientName}).toArray(function(err,result){
+            res.render('../views/manager_chat.ejs');
+       // })
+        
+    })
 }
