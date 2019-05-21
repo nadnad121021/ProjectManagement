@@ -36,7 +36,8 @@ module.exports = function(app){
         var mongoUtil = require( '../../public/assets/scripts/mongdb' );
         var db = mongoUtil.getDb();
         db.collection('User').find({"Type":"Client","Status":"Assigned"}).toArray(function(err,doc){
-            console.log(doc)
+            //console.log(doc[0].Projects[0].Tasks[0].length)
+            console.log(doc[0])
             var Clients = doc;
             db.collection('Projects').find({"Type":"Open"}).toArray(function(err,open){
                 var Open = open;

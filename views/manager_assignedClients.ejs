@@ -57,22 +57,29 @@
                      <% var counter = 1, innerCounter = 0 ,taskCounter = 0; %>
                      <% Users.forEach(function(user){%>
                            <tr>
-                              <% if(innerCounter===0){%>
-                                  <td><%= counter %></td>
-                                  <td><%= user.FullName %></td>
-                                  <td><%= user.Projects[innerCounter].ProjectName %></td>
-                                  <td><%= user.Projects[innerCounter].Progress + " out of " +user.Projects[innerCounter].Tasks.length%></td>
-                                  <td><%= user.Projects[innerCounter].DateAssigned %></td>
-                              <%}else{%>
-                                 <td></td>
-                                 <td></td>
-                                 <td><%= user.Projects[innerCounter].ProjectName %></td>
-                                 <td><%= user.Projects[innerCounter].DateAssigned %></td>
+                              <% for(var i = 0;i< user.Projects.length;i++){%>
+                                 <% if(i===0){%>
+                                    <td><%= counter %></td>
+                                    <td><%= user.FullName %></td>
+                                 <%}else{%>
+                                       <td></td>
+                                       <td></td> 
+                                 <%}%>
+                                 <td><%= user.Projects[i].ProjectName %></td>
+                                 <td><%= user.Projects[i].Progress + " out of " +user.Projects[innerCounter].Tasks[taskCounter].length%></td>
+                                 <td><%= user.Projects[i].DateAssigned %></td>
+                                 <td>
+                                    <select class="form-control form-control-sm">
+                                          
+                                    </select>
+                                 </td>
+                                 <td><button id="<%= user._id %>" class="btn btn-sm btn-info butuon" style="width: 80%; margin-left: 10%;">New</button></td>
                               <%}%>
                            </tr>
                            <% counter++%>
                      <%})%>
-                     <tr>
+                    
+                     <!-- <tr>
                         <td>1</td>
                         <td>Panfilo Lacson</td>
                         <td>Project 1</td>
@@ -179,19 +186,59 @@
                               <option>Task 4</option>
                            </select>
                         </td>
-                     </tr>
+                     </tr> -->
                   </tbody>
                </table>
+               <div class="container" id="Projects">
+                     <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Choose Project</h3>
+                     <select class="form-control form-control-sm" id="Proj" style="width: 79.5%; display: inline-block;">
+                        <option value="EX" >View Projects</option>
+                           <% OpenProjects.forEach(function(item){%>
+                                 <option value="<%= item._id %>" ><%= item.ProjectName %></option>
+                           <%})%>
+                     </select>
+                     <button id="Continue" class="btn btn-sm btn-info" style="width: 20%; margin-left: -15%;float: right;">Continue</button>
+               </div>
             </div>
          </div>
    </body>
    <script>
         $(document).ready(function(){
+           $Proj = $('#Proj');
+           var IDClient;
+           $Continue = $('#Continue');
            $('#Projects').hide();
            $('.butuon').click(function(){
              $('#Projects').show();
-             //alert($(this).attr('id'));
+             
+             IDClient = $(this).attr('id');
            })
+           $Continue.click(function(){
+               if($Proj.val()==="EX"){
+                     alert("Choose Project First!")
+               }else{
+                     var date = new Date();
+                     var month = date.getMonth() + 1;
+                     if(month < 10){month="0"+month};
+                     var day = date.getDate();
+                     if(day < 10 ){day="0"+day};
+                     var year = date.getFullYear();
+                     var client = {
+                        idClient:IDClient,
+                        idProject:$Proj.val(),
+                        DateAssigned:month+"/"+day+"/"+year,
+                     }
+                   $.ajax({
+                     method:'POST',
+                     url:'/assignClient',
+                     data:client,
+                     success:function(mesage){
+                         alert(mesage);
+                         top.location.href = "/manager_assignedClients"
+                     }
+                 })
+               }
+            })
         })
         function myFunction(hehe){
             console.log(hehe)
