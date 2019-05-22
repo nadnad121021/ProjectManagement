@@ -2,6 +2,7 @@ const io = require('socket.io');
 module.exports = function(io){
     io.sockets.on('connection',function(socket){
         console.log("Connected one")
+        console.log(socket)
         //connections.push(socket);
         console.log('Connected: %s sockets connected',connections.length);
        

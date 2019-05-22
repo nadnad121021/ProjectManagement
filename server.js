@@ -13,11 +13,8 @@ const ManagerPostRoutes = require('./routes/managerRoutes/postRoutes');
 const SecretaryGetRoutes = require('./routes/secretaryRoutes/getRoutes');
 const ClientGetRoutes = require('./routes/clientRoutes/getRoutes');
 const ClientPostRoutes = require('./routes/clientRoutes/postRoutes');
-// const sockets = require('./public/controller/chatController');
-// sockets(io);
-// var MongoClient = require('mongodb').MongoClient;
-// //onst uri = "mongodb://172.16.32.40:27017/";
-// const uri = "mongodb://172.16.8.29:27017/";
+const sockets = require('./public/controller/chatController');
+sockets(io);
 
 var mongoUtil = require( './public/assets/scripts/mongdb' );
 
@@ -42,12 +39,6 @@ ClientGetRoutes(app);
 ClientPostRoutes(app);
 
 const port = process.env.PORT || 3000;
-
-// MongoClient.connect(uri,{useNewUrlParser:true},(err,res)=>{
-//     assert.equal(null, err);
-//     app.listen(port,(err,res)=>{console.log(`Listening to port ${port}.....`)});
-// });
-
 mongoUtil.connectToServer( function( err, client ) {
     if (err) console.log("NOT CONNECTED TO DATABASE");
       assert.equal(null, err);
