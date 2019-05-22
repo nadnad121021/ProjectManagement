@@ -71,11 +71,15 @@
                     data:toEdit,
                     success:function(dat){
                        alert(dat)
-                       top.location.href = '/ClientDashboard';
+                      
                     }
                  })
+                 top.location.href = '/ClientDashboard';
                }
             });
+            $('#cancel').click(function(){
+               top.location.href = '/ClientDashboard';
+            })
          })
          </script>
 </html>

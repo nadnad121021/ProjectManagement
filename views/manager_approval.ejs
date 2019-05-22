@@ -342,70 +342,44 @@
                   <th style="width: 15%; padding-left: 1.5%;">Status</th>
                </thead>
                <tbody>
-                  <tr>
-                      <td>1</td>
-                      <td>Chel Diokno</td>
-                      <td>Corrupt Politician Detector</td>
-                      <td>
-                            <select class="form-control form-control-sm" style="width: 100%;">
-                                <option>View Task</option>
-                                <option disabled>Task 1</option>
-                                <option disabled>Task 2</option>
-                                <option disabled>Task 3</option>
-                                <option disabled>Task 4</option>
-                            </select>
-                      </td>
-                      <td><button class="btn btn-sm btn-info" style="margin-left: 20%;" id="changes">View Changes</button></td>
-                      <td>Denied</td>
-                    </tr>
+                  <% var counter = 1 %>
+                  <% if(Approvals){%>
+                     <% Approvals.forEach(function(app){%>
+                         <tr>
+                            <td><%= counter ++ %></td>
+                            <td><%= app.Client %></td>
+                            <td><%= app.ProjectName %></td>
+                            <td>
+                                 <select class="form-control form-control-sm" style="width: 100%;">
+                                       <option>View Task</option>
+                                       <% app.From.forEach(function(item){%>
+                                          <option disabled ><%= item %> </option>
+                                       <%})%>
+                                 </select>
+                            </td>
+                            <% if(app.Status === "Pending"){%>
+                              <td><button class="btn btn-sm btn-info changes" style="margin-left: 20%;" id="<%= app._id %>">View Changes</button></td>
+                            <%}else if(app.Status==="Approved"){%>
+                              <td><button disabled class="btn btn-sm btn-success changes" style="margin-left: 20%;" id="<%= app._id %>">View Changes</button></td>
+                            <%}else{%>
+                              <td><button disabled class="btn btn-sm btn-danger" style="margin-left: 20%;" id="<%= app._id %>">View Changes</button></td>
+                            <%}%>
+                            <td><%= app.Status %></td>
+                         </tr>
+                     <%})%>   
+                  <%}%>
                </tbody>
             </table>
-         </div>
-         <div class="row" style="margin-top: 5%;" id="edit">
-            <table class="table table-bordered">
-                <tbody>
-                  <tr>
-                    <td rowspan="6" style="text-align:center; width: 50%; vertical-align: middle; font-weight: bolder; font-size: 2rem;">Tasks</td>
-                    <td>Task 1 edited</td>
-                  </tr>
-                  <tr>
-                    <td>Task 2 edited</td>
-                  </tr>
-                  <tr>
-                    <td>Task 3 wala gi edit</td>
-                  </tr>
-                  <tr>
-                    <td>Task 4 wala gi edit</td>
-                  </tr>
-                  <tr>
-                    <td>Task 5 wala gi edit</td>
-                  </tr>
-                  <tr>
-                    <td>Task 6 wala gi edit</td>
-                  </tr>
-                </tbody>
-              </table>
-              <div style="width: 100%; margin-top: 2%;">
-                <center>
-                    <button type="button" class="btn btn-danger" style="width: 12%;" id="deny">Deny</button>
-                    <button type="button" class="btn btn-info" style="width: 12%;" id="approve">Approve</button>
-                </center>
-              </div>
          </div>
       </div>
    </body>
    <script>
         $(document).ready(function(){
             $("#edit").hide();
-            $("#changes").click(function(){
-                $("#edit").show();
+            $(".changes").click(function(){
+               top.location.href = "/manager_needApp?AppId="+$(this).attr('id');
             })     
-            $("#deny").click(function(){
-                $("#edit").hide();
-            });
-            $("#approve").click(function(){
-                $("#edit").hide();
-            });
+           
         });
    </script>
 </html>
