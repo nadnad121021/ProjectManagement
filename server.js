@@ -12,7 +12,9 @@ const ManagerGetRoutes = require('./routes/managerRoutes/getRoutes');
 const ManagerPostRoutes = require('./routes/managerRoutes/postRoutes');
 const SecretaryGetRoutes = require('./routes/secretaryRoutes/getRoutes');
 const ClientGetRoutes = require('./routes/clientRoutes/getRoutes');
-
+const ClientPostRoutes = require('./routes/clientRoutes/postRoutes');
+// const sockets = require('./public/controller/chatController');
+// sockets(io);
 // var MongoClient = require('mongodb').MongoClient;
 // //onst uri = "mongodb://172.16.32.40:27017/";
 // const uri = "mongodb://172.16.8.29:27017/";
@@ -37,6 +39,7 @@ ManagerGetRoutes(app);
 ManagerPostRoutes(app);
 SecretaryGetRoutes(app);
 ClientGetRoutes(app);
+ClientPostRoutes(app);
 
 const port = process.env.PORT || 3000;
 

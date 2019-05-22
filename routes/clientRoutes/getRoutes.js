@@ -14,13 +14,6 @@ module.exports = function(app){
            }else{
              res.render("../views/client.ejs",{Data:undefined});
            }
-           
-         //   if(doc.length >0){
-         //      res.render("../views/client.ejs",{Data:doc[0]})
-         //     console.log((doc[0].Projects)[0])
-         //   }else{
-         //      // res.render("../views/client.ejs");
-         //   }
         })
     })
 

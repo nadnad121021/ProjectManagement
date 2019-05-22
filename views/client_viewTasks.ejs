@@ -8,54 +8,26 @@
       <link rel="stylesheet" href="/assets/styles/manager_viewTasks.css">
    </head>
    <body>
-      <!-- <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet"> -->
-      <!-- <div class="menu"> <span></span> </div>
-      <nav id="nav">
-         <ul class="main">
-            <p style="font-size: 2em; color: #fff;">Manager</p>
-            <li class="has-subnav">
-                  <a class="nav-text" href="manager_takenProjects.html">Projects</a>
-                  <ul>
-                     <li><a href="manager_openProjects.html" class="sub">Open Projects</a></li>
-                  </ul>
-               </li>
-            <li class="has-subnav">
-               <a class="nav-text" style="color: #ec2652;">Clients</a>
-               <ul>
-                  <li><a href="manager_assignedClients.html" class="sub">Assigned Clients</a></li>
-                  <li><a href="manager_unassignedClients.html" class="sub">Unassigned Clients</a></li>
-               </ul>
-            </li>
-            <li><a href="manager_approval.html">Approval</a></li>
-            <li><a href="manager_chat.html">Chat</a></li>
-            <li><a href="login.html">Logout</a></li>
-         </ul>
-      </nav>
-      <div class="overlay"></div>
-      <script>
-         $('.menu, .overlay').click(function () {
-           $('.menu').toggleClass('clicked');
-           $('#nav').toggleClass('show');
-         });
-      </script> -->
       <div class="container" style="margin-top: 5%; width: 100%;">
             <!-- <h3 style="margin-top: 5%; margin-bottom: 2%;" class="font-weight-normal">Tasks</h3> -->
             <div class="row" style="margin-top: 5%; width: 100%; margin-bottom: 5%;" id="task">
            <table class="table table-bordered">
                <tbody>
-                  <% counter = 1, taskCounter = 0; %>
-                 <tr>
-                   <td rowspan="6" style="text-align:center; width: 50%; vertical-align: middle; font-weight: bolder; font-size: 2rem;"><%= Project.ProjectName %></td>
-                   <td><input type="text" class="form-control form-control-sm" placeholder="<%= Project.Tasks[0] %>"></td>
-                 </tr>
+                  <% counter = 1 %>
                  <input type="number" id="in" style="display:none" value="<%= Project.Tasks.length %>">
                  <input type="text" id="TaskName" style="display:none" value="<%= Project.ProjectName %>">
-                 <form action="" id="form">
-                  <% for(;counter< Project.Tasks.length;counter++){%>
-                      <tr>
-                        <td><input type="text" class="form-control form-control-sm" id="<%= taskCounter++ %>" placeholder="<%= Project.Tasks[counter] %>"></td>
-                     </tr>
-                  <%}%>
+                 <input type="text" id="User" style="display:none" value="<%= Project.Client %>">
+               <form>
+                <% for(var count = 0;count< Project.Tasks.length;count++){%>
+                   <tr>
+                      <% if(count===0){%>
+                        <td rowspan="6" style="text-align:center; width: 50%; vertical-align: middle; font-weight: bolder; font-size: 2rem;"><%= Project.ProjectName %></td>
+                       <%}%>
+                       <td><input  type="text" class="form-control form-control-sm" id="<%= count %>" placeholder="<%= Project.Tasks[count] %>"></td>
+                   </tr>
+                <%}%>
+                <input type="submit" id="Submit" style="display:none">
+               <form>
                </form>
                </tbody>
              </table>
@@ -67,25 +39,43 @@
               </div>
         </div>
       </div>
-      <script>
-      $(document).ready(function(){
-         var count = $('#in').val()
-         var newTasks = [];
-         $('#ok').click(function(){
-            var i = 0;
-            var count = $('#in').val()
-            for(;i < count; i++){
-               // if($(`#${count-i}`).val().length > 0){
-               //    newTasks.push($(`#${count-i}`).val());
-               //    console.log(newTasks)
-               // }
-               console.log($(`#${count-i}`).val())
-              // newTasks.push($(`#${count-i}`).val());
-            }
-           alert(newTasks)
-           newTasks = []
-         });
-      })
-      </script>
    </body>
+   <script>
+         $(document).ready(function(){
+            var count = $('#in').val()
+            $('#ok').click(function(){
+               for(var x = 0;x<3;x++){
+                  $("#"+x).prop('required',true);
+               }
+               var newTasks = [];
+               for(var i = 0;i < count; i++){
+                  if($("#"+i).val().length > 0){
+                     newTasks.push($("#"+i).val());
+                     //console.log(Tasks)
+                  }
+                  // console.log($(`#${count-i}`).val())
+                 // newTasks.push($(`#${count-i}`).val());
+               }
+               console.log(newTasks)
+               if(newTasks.length < 3){
+                  $('#Submit').click()
+               }else{
+                  var toEdit = {
+                     TaskName:$('#TaskName').val(),
+                     ClientName:$('#User').val(),
+                     Tasks:newTasks
+                  }
+                 $.ajax({
+                    method:"POST",
+                    url:"/updateTasks",
+                    data:toEdit,
+                    success:function(dat){
+                       alert(dat)
+                       top.location.href = '/ClientDashboard';
+                    }
+                 })
+               }
+            });
+         })
+         </script>
 </html>
